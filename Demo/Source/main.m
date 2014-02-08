@@ -28,7 +28,7 @@ int main (int argc, const char *argv[])
 		BOOL wantsMultipleCommentWarning = YES;
         BOOL wantsDecodedUnicodeSequences = NO;
         NSMutableSet *tablesToSkip = [NSMutableSet set];
-        NSString *customMacroPrefix = nil;
+        NSMutableArray *customMacroPrefixs = [[NSMutableArray alloc] init];
         NSString *defaultTableName = nil;
         
         // analyze options
@@ -100,8 +100,7 @@ int main (int argc, const char *argv[])
                     optionsInvalid = YES;
                     break;
                 }
-                
-                customMacroPrefix = [NSString stringWithUTF8String:argv[i]];
+                [customMacroPrefixs addObject: [NSString stringWithUTF8String:argv[i]]];
             }
 			else if (!strcmp("-q", argv[i]))
 			{
@@ -173,7 +172,8 @@ int main (int argc, const char *argv[])
         // set the parameters
         aggregator.wantsPositionalParameters = wantsPositionalParameters;
         aggregator.inputEncoding = inputStringEncoding;
-        aggregator.customMacroPrefix = customMacroPrefix;
+        aggregator.customMacroPrefixs = customMacroPrefixs;
+        aggregator.customMacroPrefix = nil;
         aggregator.tablesToSkip = tablesToSkip;
         aggregator.defaultTableName = defaultTableName;
 		

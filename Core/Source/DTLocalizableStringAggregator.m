@@ -37,6 +37,7 @@
 @synthesize inputEncoding = _inputEncoding;
 @synthesize tablesToSkip = _tablesToSkip;
 @synthesize customMacroPrefix = _customMacroPrefix;
+@synthesize customMacroPrefixs = _customMacroPrefixs;
 @synthesize defaultTableName = _defaultTableName;
 
 - (id)init
@@ -67,9 +68,10 @@
 	if (customMacroPrefix != _customMacroPrefix)
 	{
 		_customMacroPrefix = customMacroPrefix;
-		_validMacros = nil;
 	}
+    _validMacros = nil;
 }
+
 
 #define KEY @"rawKey"
 #define COMMENT @"comment"
@@ -83,7 +85,8 @@
 	{
 		// we know the allowed formats for NSLocalizedString() macros, so we can hard-code them
 		// there's no need to parse this stuff when we know what format things must be
-		NSArray *prefixes = [NSArray arrayWithObjects:@"NSLocalizedString", @"CFCopyLocalizedString", _customMacroPrefix, nil];
+		NSMutableArray *prefixes = [NSMutableArray arrayWithObjects:@"NSLocalizedString",@"CFCopyLocalizedString", _customMacroPrefix, nil];
+        [prefixes addObjectsFromArray:_customMacroPrefixs];
 		NSDictionary *suffixes = [NSDictionary dictionaryWithObjectsAndKeys:
 										  [NSArray arrayWithObjects:KEY, COMMENT, nil], @"",
 										  [NSArray arrayWithObjects:KEY, TABLE, COMMENT, nil], @"FromTable",

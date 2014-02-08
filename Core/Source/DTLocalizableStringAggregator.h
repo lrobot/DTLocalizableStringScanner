@@ -41,6 +41,8 @@
  */
 @property (nonatomic, retain) NSString *customMacroPrefix;
 
+@property (nonatomic, retain) NSMutableArray *customMacroPrefixs;
+
 /**
  The default table name, if not set it defaults to "Localizable".
  */
