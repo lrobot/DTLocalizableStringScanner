@@ -70,6 +70,7 @@ typedef void(^DTLocalizableStringEntryWriteCallback)(DTLocalizableStringEntry *)
  @param entryWriteCallback The block to execute before an entry is output
  @returns An `NSString ` containing the contents of the receiver
  */
+- (NSString *)textRepresentationWithEncoding:(NSStringEncoding)encoding error:(NSError **)error entryWriteCallback:(DTLocalizableStringEntryWriteCallback)entryWriteCallback;
 - (NSString *)stringRepresentationWithEncoding:(NSStringEncoding)encoding error:(NSError **)error entryWriteCallback:(DTLocalizableStringEntryWriteCallback)entryWriteCallback;
 
 /**
@@ -81,5 +82,7 @@ typedef void(^DTLocalizableStringEntryWriteCallback)(DTLocalizableStringEntry *)
  @returns An `NSString ` containing the contents of the receiver
  */
 - (BOOL)writeToFolderAtURL:(NSURL *)url encoding:(NSStringEncoding)encoding error:(NSError **)error entryWriteCallback:(DTLocalizableStringEntryWriteCallback)entryWriteCallback;
+
+- (BOOL)writeTextToFolderAtURL:(NSURL *)url encoding:(NSStringEncoding)encoding error:(NSError **)error entryWriteCallback:(DTLocalizableStringEntryWriteCallback)entryWriteCallback;
 
 @end

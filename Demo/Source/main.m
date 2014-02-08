@@ -215,6 +215,15 @@ int main (int argc, const char *argv[])
                 exit(1); // exit due to error
             }
         }
+        for (DTLocalizableStringTable *table in aggregatedTables) {
+            [table setShouldDecodeUnicodeSequences:wantsDecodedUnicodeSequences];
+            
+            if (![table writeTextToFolderAtURL:outputFolderURL encoding:outputStringEncoding error:&error entryWriteCallback:writeCallback]) {
+                
+                printf("%s\n", [[error localizedDescription] UTF8String]);
+                exit(1); // exit due to error
+            }
+        }
     }
     
     return 0;
